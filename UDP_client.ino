@@ -17,10 +17,24 @@
 
 #define PACKET_SIZE 4
 
+/***RESET KUT BOARD***/
+#define D0 16
+#define D1 5 // I2C Bus SCL (clock)
+#define D2 4 // I2C Bus SDA (data)
+#define D3 0
+#define D4 2 // Same as "LED_BUILTIN", but inverted logic
+#define D5 14 // SPI Bus SCK (clock)
+#define D6 12 // SPI Bus MISO 
+#define D7 13 // SPI Bus MOSI
+#define D8 15 // SPI Bus SS (CS)
+#define D9 3 // RX0 (Serial console)
+#define D10 1 // TX0 (Serial console)
+
 /***INITIALIZE CONNECTION VARIABLES***/
 
-unsigned int localPort = 9877;      // local port to listen on
-IPAddress IPaddr(192,168,137,1);
+unsigned int localPort = 4210;      // local port to listen on
+//IPAddress IPaddr(192,168,137,1);
+IPAddress IPaddr(192,168,137,165);
 
 // buffers for receiving and sending data
 //char packetBuffer[UDP_TX_PACKET_MAX_SIZE]; //buffer to hold incoming packet,
@@ -30,10 +44,18 @@ byte sendData[PACKET_SIZE] = {0,0,0,0};
 WiFiUDP Udp;
 
 /***INITIALIZE SENSORS***/
-int pushBtnMagazine = 2;   // digital pin 4 has a pushbutton attached to it
+int pushBtnMagazine = D5;   // digital pin 2 has a pushbutton attached to it
+int rotaryPin1 = D6;
+int rotaryPin2 = D7;
+
+/***INITIALIZE HELP VARIABLES***/
+int counterRotary = 0;
+int timeCounter = 0;
 
 void setup() {
+  /***SETUP SERIAL MONITOR***/
   Serial.begin(9600);
+  /***SETUP WIFI & UDP***/
   WiFi.mode(WIFI_STA);
   WiFi.begin(STASSID, STAPSK);
   while (WiFi.status() != WL_CONNECTED) {
@@ -44,32 +66,37 @@ void setup() {
   Serial.println(WiFi.localIP());
   Serial.printf("UDP server on port %d\n", localPort);
   Udp.begin(localPort);
-
   /***SETUP SENSORS***/
-    pinMode(pushBtnMagazine, INPUT); // make the pushbutton's pin an input
+  pinMode(pushBtnMagazine, INPUT); // make the pushbutton's pin an input
+  pinMode(rotaryPin1,INPUT);
+  pinMode(rotaryPin2,INPUT);
+  attachInterrupt(digitalPinToInterrupt(rotaryPin2), countGunMode, CHANGE);
 }
 
 void loop() {
 
-  boolean sensorActivated = false;
+  //boolean sensorActivated = false;
   
-  /***POLLING OF SENSORS***/             
-  if(digitalRead(pushBtnMagazine)){
-    sensorActivated = true;
-    sendData[3] = 32;  // bitSafety bitSafety bitMagazine(32 or 0) bitFree bitFree bitFree bitFree bitFree
+  /***POLLING OF SENSORS***/ 
+  //Serial.println("Value read: ");
+  //Serial.println(digitalRead(pushBtnMagazine));            
+  if(digitalRead(pushBtnMagazine) == LOW){
+    //sensorActivated = true;
+    sendData[3] = 1;  // bitSafety bitSafety bitMagazine(32 or 0) bitFree bitFree bitFree bitFree bitFree
+    //Serial.println("MAGAZIN INSERTED");
   }
   // print out the state of the button:
   //Serial.println(digitalRead(pushBtnMagazine));
 
-  /*sendData[0] = 0x01;
-  sendData[1] = 0x10;
-  sendData[2] = 0x00;
-  sendData[3] = 0x05;*/
+  /*CHECK ROTARY MODE*/
+  if(counterRotary <= -4)                               sendData[3] += 2;                             //mode: SEMI
+  else if(-1 <= counterRotary && counterRotary <= 1)    sendData[3] += 0;                             //mode: SAFETY
+  else if(counterRotary >= 4)                           sendData[3] += 4;                             //mode: AUTO
 
   /***UDP PROTOCOL***/
   
   /*SEND DATA IF APPLICABLE*/
-  if (sensorActivated){
+  if (timeCounter = 100){
   
     Udp.beginPacket(IPaddr, localPort);   //create packet
     for(int i=0;i<PACKET_SIZE;i++){
@@ -77,12 +104,29 @@ void loop() {
     }
     
     Udp.endPacket();                      //(s)end packet
-    
-    /*RESET DATA AFTER SENDING*/
-    sensorActivated = false;
-    for (int i = 0; i < 3; i++)
-      sendData[i] = 0;
 
+    timeCounter = 0;
   }
-  delay(500); 
+  
+  /*RESET DATA AFTER SENDING*/
+  //sensorActivated = false;
+  for (int i = 0; i < 4; i++)
+    sendData[i] = 0;
+
+  
+  delay(100);
+  timeCounter += 1;
+}
+
+void countGunMode(){
+  
+  if(digitalRead(rotaryPin1) != digitalRead(rotaryPin2)){
+    counterRotary++;
+  }
+  else{
+    counterRotary--;
+  }
+  Serial.print("position = ");
+  Serial.println(counterRotary);
+  
 }
