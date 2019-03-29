@@ -16,6 +16,6 @@ int updateMagazineButton()
     value = 1;  // bitSafety bitSafety bitMagazine(32 or 0) bitFree bitFree bitFree bitFree bitFree
     //Serial.println("MAGAZIN INSERTED");
   }
-  sendData[3] = value;
+  sendData[3] += value;
   return value;
 }

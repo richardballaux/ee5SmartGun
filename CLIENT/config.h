@@ -16,10 +16,13 @@
 //IP Shivam
 //#define IP_Address 192, 168, 137, 165
 //IP Olivier
-#define IP_Address 192,168,137,1
+//#define IP_Address 192,168,137,1
+//IP Roy
+#define IP_Address 192,168,137,219
 
 
 /**PINS DIVISION**/
+#define analogTrigger A0
 #define pushBtnMagazine D5
 #define rotaryPin1 D6
 #define rotaryPin2 D7

@@ -11,10 +11,14 @@
 #include "wirelessDataTransfer.h"
 #include "rotaryEncoder.h"
 #include "pushButtonMagazine.h"
+#include "hallEffectTrigger.h"
 
 
 /***INITIALIZE CONNECTION VARIABLES***/
-byte sendData[PACKET_SIZE] = { 0,0,0,0 };;
+byte sendData[PACKET_SIZE] = { 0,0,0,0 };
+/*unsigned long oldLoopTime = 0;
+unsigned long newLoopTime = 0;
+unsigned long cycleTime = 0;*/
 
 /***INITIALIZE SENSORS***/
 
@@ -26,7 +30,7 @@ int timeCounter = 0;
 
 void setup() {
   /***SETUP SERIAL MONITOR***/
-  Serial.begin(9600);
+  Serial.begin(115200);
   /***SETUP WIFI & UDP***/
   if (setUpWifi()){
     Serial.print("Connected! IP address: ");
@@ -36,10 +40,13 @@ void setup() {
    /***SETUP SENSORS***/
   setupMagazineButton();
   setupRotaryEncoder();
+  setupTrigger();
   
 }
 
 void loop() {
+  /*newLoopTime = millis();
+  oldLoopTime = newLoopTime;*/
 
   /***CHECK WIFI***/
   checkWifi();
@@ -50,6 +57,9 @@ void loop() {
   
   /*CHECK ROTARY MODE*/
   updateRotaryMode();
+
+  /*CHECK TRIGGER*/
+  updateTrigger();
 
   /***UDP PROTOCOL***/
   
@@ -66,6 +76,9 @@ void loop() {
     sendData[i] = 0;
 
   
-  delay(100);
+  //delay(100);
   timeCounter += 1;
+  /*cycleTime = millis() - newLoopTime;
+  Serial.print("Cycletime: ");
+  Serial.println(cycleTime);*/
 }
