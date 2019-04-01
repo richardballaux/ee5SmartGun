@@ -25,10 +25,10 @@ int updateTrigger()
 
 int calculate_average(){
   sum = 0;
-  for(int i = 0; i <(ARRAYSIZE/2); i++){
+  for(int i = 0; i <(ARRAYSIZE); i++){
     sum += samples[i];
   }
-  int answer = 2*sum/ARRAYSIZE;
+  int answer = sum/ARRAYSIZE;
   return answer;
 }
 void move_samples(){

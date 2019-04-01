@@ -2,8 +2,7 @@
 #include "config.h"
 
 //byte sendData[PACKET_SIZE];
-int counterRotary = 0;
-int modeBitValue = 0;
+int counterRotary = -2;
 
 
 void setupRotaryEncoder()
@@ -15,11 +14,15 @@ void setupRotaryEncoder()
   
 int updateRotaryMode()
 {
-  if(counterRotary < -2)                               modeBitValue = 0;                             //mode: SAFETY
-  else if(-2 <= counterRotary && counterRotary <= 2)   modeBitValue = 2;                             //mode: SEMI
-  else if(counterRotary > 2)                           modeBitValue = 4;                             //mode: AUTO
-  sendData[3] += modeBitValue;
-  return modeBitValue;
+  int value = 0;
+  if(counterRotary < -1)                               value = 0;                             
+  //mode: SAFETY
+  else if(-1 <= counterRotary && counterRotary <= 1)    value = 2;                             
+  //mode: SEMI
+  else if(counterRotary > 1)                           value = 4;                             
+  //mode: AUTO
+  sendData[3] += value;
+  return value;
 }
 
 void countRotaryMode(){

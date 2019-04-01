@@ -24,3 +24,7 @@
 #define PACKET_SIZE 4
 
 extern byte sendData[PACKET_SIZE];
+
+boolean timeToSendUdp();
+void updateTimer();
+void resetData();

@@ -15,7 +15,6 @@
 
 
 /***INITIALIZE CONNECTION VARIABLES***/
-byte sendData[PACKET_SIZE] = { 0,0,0,0 };
 /*unsigned long oldLoopTime = 0;
 unsigned long newLoopTime = 0;
 unsigned long cycleTime = 0;*/
@@ -26,7 +25,6 @@ unsigned long cycleTime = 0;*/
 
 /***INITIALIZE HELP VARIABLES***/
 
-int timeCounter = 0;
 
 void setup() {
   /***SETUP SERIAL MONITOR***/
@@ -64,21 +62,14 @@ void loop() {
   /***UDP PROTOCOL***/
   
   /*SEND DATA IF APPLICABLE*/
-  if (timeCounter = 100){
+  if(timeToSendUdp()){
 
+    updateTimer();
     sendUDP();
-    timeCounter = 0;
+    
   }
   
   /*RESET DATA AFTER SENDING*/
-  //sensorActivated = false;
-  for (int i = 0; i < 4; i++)
-    sendData[i] = 0;
+  resetData();
 
-  
-  //delay(100);
-  timeCounter += 1;
-  /*cycleTime = millis() - newLoopTime;
-  Serial.print("Cycletime: ");
-  Serial.println(cycleTime);*/
 }
