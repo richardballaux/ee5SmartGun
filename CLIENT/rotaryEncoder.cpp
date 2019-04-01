@@ -15,9 +15,9 @@ void setupRotaryEncoder()
   
 int updateRotaryMode()
 {
-  if(counterRotary < -2)                               value = 0;                             //mode: SAFETY
-  else if(-2 <= counterRotary && counterRotary <= 2)   value = 2;                             //mode: SEMI
-  else if(counterRotary > 2)                           value = 4;                             //mode: AUTO
+  if(counterRotary < -2)                               modeBitValue = 0;                             //mode: SAFETY
+  else if(-2 <= counterRotary && counterRotary <= 2)   modeBitValue = 2;                             //mode: SEMI
+  else if(counterRotary > 2)                           modeBitValue = 4;                             //mode: AUTO
   sendData[3] += modeBitValue;
   return modeBitValue;
 }
