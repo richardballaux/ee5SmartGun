@@ -31,9 +31,7 @@ void setup() {
   Serial.begin(115200);
   /***SETUP WIFI & UDP***/
   if (setUpWifi()){
-    Serial.print("Connected! IP address: ");
-    Serial.println(WiFi.localIP());
-    Serial.printf("UDP server on port %d\n", localPort);
+    printWifiInfo();
   }
    /***SETUP SENSORS***/
   setupMagazineButton();

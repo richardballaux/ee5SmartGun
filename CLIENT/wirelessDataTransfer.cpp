@@ -15,6 +15,13 @@ int setUpWifi()
 	return 1;
 }
 
+void printWifiInfo()
+{
+    Serial.println("Connected! IP address: ");
+    Serial.println(WiFi.localIP());
+    Serial.printf("UDP server on port %d\n", localPort);  
+}
+
 void setUpUDP()
 {
 	Udp.begin(localPort);
@@ -27,7 +34,8 @@ int sendUDP()
 		Udp.write(sendData[i]);           
 	}
 
-	Udp.endPacket();                      
+	Udp.endPacket();  
+  //Serial.println("UDP HAS BEEN SENT");                    
 }
 
 void checkWifi()
@@ -35,6 +43,8 @@ void checkWifi()
   if (WiFi.status() != WL_CONNECTED)
         {
             Serial.println("WIFI HAS BEEN DISCONNECTED... RESETTING NOW");
-            setUpWifi();
+            if (setUpWifi())
+                printWifiInfo();
+            
         } 
 }

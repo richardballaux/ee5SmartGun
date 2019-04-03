@@ -6,6 +6,7 @@
 //extern WiFiUDP Udp;
 
 int setUpWifi();
+void printWifiInfo();
 void setUpUDP();
 int sendUDP();
 void checkWifi();

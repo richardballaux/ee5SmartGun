@@ -4,22 +4,28 @@
 
 unsigned int sum;
 int samples[ARRAYSIZE];
+int startValue;
 
 void setupTrigger()
 {
   for(int i = 0; i <ARRAYSIZE; i++){
     samples[i] = analogRead(analogTrigger);
   }
+  startValue = calculate_average();
 }
 
 int updateTrigger()
 {
-
-  int value = map(calculate_average(), 338,1024,0,255);
-  sendData[0] = value;
-  Serial.println("Value trigger: ");
-  Serial.println(value);
+  int value = map(calculate_average(), 510,startValue,255,0);
+  //Serial.println("Value trigger: ");
+  //Serial.println(value);
+  //Serial.println(calculate_average());
   move_samples();
+  if (value > 255) value = 255;
+  else if (value < 0) value = 0;
+  Serial.println("Actual value: ");
+  Serial.println(value);
+  sendData[0] = value;
   return value;  
 }
 
@@ -31,6 +37,7 @@ int calculate_average(){
   int answer = sum/ARRAYSIZE;
   return answer;
 }
+
 void move_samples(){
   for(int i = 0; i < (ARRAYSIZE-1); i++){
     samples[i] = samples[i+1];

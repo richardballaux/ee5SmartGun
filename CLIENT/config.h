@@ -14,11 +14,11 @@
 /**UDP CONFIG**/
 #define localPort 4210
 //IP Shivam
-//#define IP_Address 192, 168, 137, 165
+#define IP_Address 192, 168, 137, 51
 //IP Olivier
 //#define IP_Address 192,168,137,1
 //IP Roy
-#define IP_Address 192,168,137,219
+//#define IP_Address 192,168,137,219
 
 
 /**PINS DIVISION**/

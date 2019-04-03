@@ -28,7 +28,7 @@ void updateTimer()
   nowSent = millis();
   //Serial.print(nowSent - lastTimeSent);
   lastTimeSent = nowSent;
-  Serial.println("\t I now send UDP");
+  //Serial.println("\t I now send UDP");
   
 }
 
