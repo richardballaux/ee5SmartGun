@@ -33,7 +33,7 @@ void countRotaryMode(){
   else{
     counterRotary--;
   }
-  Serial.print("position = ");
-  Serial.println(counterRotary);
+  //Serial.print("position = ");
+  //Serial.println(counterRotary);
   
 }

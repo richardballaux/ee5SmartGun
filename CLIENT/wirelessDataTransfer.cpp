@@ -4,7 +4,7 @@
 IPAddress IPaddr(IP_Address);
 WiFiUDP Udp;
 
-int setUpWifi()
+int setupWifi()
 {
 	WiFi.mode(WIFI_STA);
 	WiFi.begin(STASSID, STAPSK);
@@ -22,7 +22,7 @@ void printWifiInfo()
     Serial.printf("UDP server on port %d\n", localPort);  
 }
 
-void setUpUDP()
+void setupUDP()
 {
 	Udp.begin(localPort);
 }
@@ -43,7 +43,7 @@ void checkWifi()
   if (WiFi.status() != WL_CONNECTED)
         {
             Serial.println("WIFI HAS BEEN DISCONNECTED... RESETTING NOW");
-            if (setUpWifi())
+            if (setupWifi())
                 printWifiInfo();
             
         } 
