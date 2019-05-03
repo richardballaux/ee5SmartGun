@@ -10,6 +10,8 @@ unsigned long nowSent = 0;
 
 byte sendData[PACKET_SIZE] = { 0,0,0,0 };
 
+int counter = 0;
+
 boolean timeToSendUdp()
 {
   newLoopTime = millis();
@@ -36,4 +38,18 @@ void resetData()
 {
   for (int i = 0; i < 4; i++)
     sendData[i] = 0;
+}
+
+void printData()
+{
+  counter++;
+  if (counter > 100)
+  {
+  counter = 0;
+  Serial.println("This is the data: ");
+  for (int i = 0; i < 4; i++)
+     Serial.println(sendData[i]); 
+
+  Serial.println("----------");
+  }
 }

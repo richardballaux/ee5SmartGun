@@ -1,8 +1,14 @@
 #ifndef _ROTARYENCODER_H
 #define _ROTARYENCODER_H
 
-#endif
+/*
+ * BROWN = GROUND
+ * RED = OUTPUT
+ * WIT = VCC
+ */
 
 void setupRotaryEncoder();
 int updateRotaryMode();
 void countRotaryMode();
+
+#endif

@@ -1,7 +1,6 @@
 #include "hallEffectTrigger.h"
 #include "config.h"
 
-
 unsigned int sum;
 int samples[ARRAYSIZE];
 int startValue;
@@ -17,14 +16,15 @@ void setupTrigger()
 int updateTrigger()
 {
   int value = map(calculate_average(), 510,startValue,255,0);
-  //Serial.println("Value trigger: ");
-  //Serial.println(value);
-  //Serial.println(calculate_average());
+  
+ //Serial.println("Value trigger: ");
+ // Serial.println(value);
+
   move_samples();
   if (value > 255) value = 255;
   else if (value < 0) value = 0;
-  Serial.println("Actual value: ");
-  Serial.println(value);
+  //Serial.println("Actual value: ");
+  //Serial.println(value);
   sendData[0] = value;
   return value;  
 }

@@ -1,8 +1,6 @@
 #ifndef _HELPER_H
 #define _HELPER_H
 
-#endif
-
 #include <ESP8266WiFi.h>
 #include <WiFiUdp.h>
 #include "Arduino.h"
@@ -28,3 +26,6 @@ extern byte sendData[PACKET_SIZE];
 boolean timeToSendUdp();
 void updateTimer();
 void resetData();
+void printData();
+
+#endif

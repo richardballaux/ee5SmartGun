@@ -4,7 +4,7 @@
   The Arduino microcontroller collects data from its sensors and sends this data
   to the computer server through the UDP protocol.
 
-  Author: Olivier
+  Author: Deuce, LeRoy, Si-Wan, notRich-ard
 */
 
 #include "config.h"
@@ -12,32 +12,23 @@
 #include "rotaryEncoder.h"
 #include "pushButtonMagazine.h"
 #include "hallEffectTrigger.h"
-
-
-/***INITIALIZE CONNECTION VARIABLES***/
-/*unsigned long oldLoopTime = 0;
-unsigned long newLoopTime = 0;
-unsigned long cycleTime = 0;*/
-
-/***INITIALIZE SENSORS***/
-
-
-
-/***INITIALIZE HELP VARIABLES***/
+#include "rfidReader.h"
 
 
 void setup() {
   /***SETUP SERIAL MONITOR***/
   Serial.begin(115200);
   /***SETUP WIFI & UDP***/
-  if (setUpWifi()){
+  if (setupWifi()){
     printWifiInfo();
   }
+  //Dit evt. weglaten, is niet nodig...
+  setupUDP();
    /***SETUP SENSORS***/
   setupMagazineButton();
   setupRotaryEncoder();
   setupTrigger();
-  
+  setupRFID();
 }
 
 void loop() {
@@ -57,6 +48,8 @@ void loop() {
   /*CHECK TRIGGER*/
   updateTrigger();
 
+  readRFID();
+
   /***UDP PROTOCOL***/
   
   /*SEND DATA IF APPLICABLE*/
@@ -64,6 +57,9 @@ void loop() {
 
     updateTimer();
     sendUDP();
+    #ifdef DEBUG
+    printData();
+    #endif
     
   }
   

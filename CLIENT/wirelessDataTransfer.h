@@ -1,12 +1,14 @@
 #ifndef _WIRELESSDATATRANSFER_H
 #define _WIRELESSDATATRANSFER_H
 
-#endif
+
 
 //extern WiFiUDP Udp;
 
-int setUpWifi();
+int setupWifi();
 void printWifiInfo();
-void setUpUDP();
+void setupUDP();
 int sendUDP();
 void checkWifi();
+
+#endif
