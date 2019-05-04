@@ -37,7 +37,7 @@ void updateTimer()
 void resetData()
 {
   for (int i = 0; i < 4; i++)
-    sendData[i] = 0;
+    if (i != 2) sendData[i] = 0;
 }
 
 void printData()

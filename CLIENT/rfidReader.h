@@ -7,6 +7,6 @@
 void setupRFID();
 void readRFID();
 void clearBufferArray();
-char searchRfidTag(String tag);
+int searchRfidTag(String tag);
 
 #endif

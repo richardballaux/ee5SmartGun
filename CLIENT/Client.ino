@@ -34,9 +34,12 @@ void setup() {
 void loop() {
   /*newLoopTime = millis();
   oldLoopTime = newLoopTime;*/
+  if(timeToSendUdp()){
 
   /***CHECK WIFI***/
+  #ifdef DEBUGWIFI
   checkWifi();
+  #endif
   
   /***POLLING OF SENSORS***/ 
            
@@ -53,17 +56,17 @@ void loop() {
   /***UDP PROTOCOL***/
   
   /*SEND DATA IF APPLICABLE*/
-  if(timeToSendUdp()){
-
+  
     updateTimer();
     sendUDP();
-    #ifdef DEBUG
+    #ifdef DEBUGDATA
     printData();
     #endif
     
-  }
+  
   
   /*RESET DATA AFTER SENDING*/
   resetData();
 
+  }
 }

@@ -5,26 +5,26 @@
 
 
 /**IF YOU WANT TO DEBUG, ENABLE THIS**/
-#define DEBUG 
+#define DEBUGDATA
+#define DEBUGUDP
+#define DEBUGWIFI
+//#define DEBUGRFID
 
 /**WIFI CONFIG**/
 #ifndef STASSID
-//#define STASSID "LAPTOP_Olivier"
-//#define STAPSK  "valencia"
-#define STASSID "tpcpcS9+"
-#define STAPSK  "popopower"
+#define STASSID "LAPTOP_Olivier"
+#define STAPSK  "valencia"
+//#define STASSID "tpcpcS9+"
+//#define STAPSK  "popopower"
+//#define STASSID "telenet-ACA5AE9"
+//#define STAPSK "fTpZz2ny2bpu"
 #endif
 
 /**UDP CONFIG**/
 #define localPort 4210
-//IP Shivam
-//#define IP_Address 192, 168, 137, 56
-#define IP_Address 192, 168, 43, 143
-//IP Olivier
-//#define IP_Address 192,168,137,1
-//IP Roy
-//#define IP_Address 192,168,137,219
+//#define IP_Address 192, 168, 43, 167
 
+#define IP_Address 192, 168, 137, 1
 
 /**PINS DIVISION**/
 #define analogTrigger A0

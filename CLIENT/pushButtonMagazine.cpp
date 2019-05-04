@@ -1,4 +1,4 @@
-#include "rotaryEncoder.h"
+#include "pushButtonMagazine.h"
 #include "config.h"
 
 //byte sendData[PACKET_SIZE];

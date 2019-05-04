@@ -6,12 +6,11 @@ WiFiUDP Udp;
 
 int setupWifi()
 {
-	WiFi.mode(WIFI_STA);
+  //WiFi.mode(WIFI_STA);
 	WiFi.begin(STASSID, STAPSK);
 	while (WiFi.status() != WL_CONNECTED) {
 		delay(500);
 	}
-
 	return 1;
 }
 
@@ -24,18 +23,34 @@ void printWifiInfo()
 
 void setupUDP()
 {
-	Udp.begin(localPort);
+  Udp.begin(localPort);
 }
 
 int sendUDP()
 {
-	Udp.beginPacket(IPaddr, localPort);   
-	for (int i = 0; i < PACKET_SIZE; i++) {
-		Udp.write(sendData[i]);           
-	}
+  //Serial.println("sendUDP: begin");
+  
+	if(Udp.beginPacket(IPaddr, localPort))
+  {   
+	  for (int i = 0; i < PACKET_SIZE; i++) {
+		  Udp.write(sendData[i]);           
+	  }
 
-	Udp.endPacket();  
-  //Serial.println("UDP HAS BEEN SENT");                    
+	  if (!Udp.endPacket()){ 
+	   #ifdef DEBUGUDP
+	   Serial.println("UDP endpacket FAILED");
+     #endif
+	  }
+     yield();
+  }
+  else
+  {
+    #ifdef DEBUGUDP
+    Serial.println("UDP beginpacket FAILED");                    
+    #endif
+  }
+  //Serial.println("sendUDP: end");
+  return 1;
 }
 
 void checkWifi()
@@ -43,8 +58,8 @@ void checkWifi()
   if (WiFi.status() != WL_CONNECTED)
         {
             Serial.println("WIFI HAS BEEN DISCONNECTED... RESETTING NOW");
-            if (setupWifi())
-                printWifiInfo();
+            //if (setupWifi())
+            //    printWifiInfo();
             
         } 
 }

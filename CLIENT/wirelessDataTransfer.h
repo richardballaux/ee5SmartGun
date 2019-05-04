@@ -1,8 +1,6 @@
 #ifndef _WIRELESSDATATRANSFER_H
 #define _WIRELESSDATATRANSFER_H
 
-
-
 //extern WiFiUDP Udp;
 
 int setupWifi();
