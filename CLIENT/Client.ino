@@ -9,11 +9,18 @@
 
 #include "config.h"
 #include "wirelessDataTransfer.h"
+#ifdef rotaryEncoder
 #include "rotaryEncoder.h"
+#endif
+#ifdef pushButton
 #include "pushButtonMagazine.h"
+#endif
+#ifdef trigger
 #include "hallEffectTrigger.h"
+#endif
+#ifdef magazineReader
 #include "rfidReader.h"
-
+#endif
 
 void setup() {
   /***SETUP SERIAL MONITOR***/
@@ -25,10 +32,18 @@ void setup() {
   //Dit evt. weglaten, is niet nodig...
   setupUDP();
    /***SETUP SENSORS***/
+  #ifdef pushButton
   setupMagazineButton();
+  #endif
+  #ifdef rotaryEncoder
   setupRotaryEncoder();
+  #endif
+  #ifdef trigger
   setupTrigger();
+  #endif
+  #ifdef magazineReader
   setupRFID();
+  #endif
 }
 
 void loop() {
@@ -36,22 +51,32 @@ void loop() {
   oldLoopTime = newLoopTime;*/
   if(timeToSendUdp()){
 
+  /***LOG GUN TYPE***/
+  #ifdef gunType
+  sendData[3] += gunType;
+  #endif
+  
   /***CHECK WIFI***/
   #ifdef DEBUGWIFI
   checkWifi();
   #endif
   
-  /***POLLING OF SENSORS***/ 
-           
+  /***POLLING OF SENSORS***/
+  #ifdef pushButton           
   updateMagazineButton();
-  
-  /*CHECK ROTARY MODE*/
+  #endif
+
+  #ifdef rotaryEncoder
   updateRotaryMode();
+  #endif
 
-  /*CHECK TRIGGER*/
+  #ifdef trigger
   updateTrigger();
+  #endif
 
+  #ifdef magazineReader
   readRFID();
+  #endif
 
   /***UDP PROTOCOL***/
   
