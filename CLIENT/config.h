@@ -4,15 +4,17 @@
 #include "helper.h"
 
 /**CHOOSE TYPE OF GUN**/
-//#define SCAR
-#define FiveSeven
+#define SCAR
+//#define FIVESEVEN
 //#define DEMOGUN
 
 /**IF YOU WANT TO DEBUG, ENABLE THIS**/
-#define DEBUGDATA
-#define DEBUGUDP
-#define DEBUGWIFI
+//#define DEBUGDATA
+//#define DEBUGUDP
+//#define DEBUGWIFI
 //#define DEBUGRFID
+//#define DEBUGTRIGGER
+#define DEBUGCOCKINGHANDLE
 
 /**WIFI CONFIG**/
 #ifndef STASSID
@@ -26,7 +28,8 @@
 
 /**UDP CONFIG**/
 #define localPort 4210
-#define IP_Address 192, 168, 137, 40
+//#define IP_Address 192, 168, 137, 40
+#define IP_Address 192, 168, 137, 116
 
 /**PINS DIVISION**/
 #define analogTrigger A0
@@ -34,30 +37,33 @@
 #define rotaryPin1 D6
 #define rotaryPin2 D7
 #define rfidPinRx D1
+#define pushBtnReset D4
+#define cockingSensor1 D2
+#define cockingSensor2 D3
 
 /*******************************/
 
 /**CHOOSE SENSORS OF GUNS, DEFAULT:**/
 #ifdef SCAR
-  #define pushButton
-  #define trigger
-  #define magazineReader
-  #define rotaryEncoder
-  #define slider
-  #define gunType 128
+  #define PUSHBUTTON
+  #define TRIGGER
+  #define MAGAZINEREADER
+  #define ROTARYENCODER
+  #define COCKINGHANDLE
+  #define GUNTYPE 128
 #endif
 
-#ifdef FiveSeven
-  #define pushButton
-  #define trigger
-  #define magazineReader
-  #define slider
-  #define gunType 64
+#ifdef FIVESEVEN
+  #define PUSHBUTTON
+  #define TRIGGER
+  #define MAGAZINEREADER
+  #define ROTARYENCODER
+  #define GUNTYPE 64
 #endif
 
 #ifdef DEMOGUN
-  #define trigger
-  #define gunType 0
+  #define TRIGGER
+  #define GUNTYPE 0
 #endif
 
 #endif

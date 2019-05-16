@@ -36,7 +36,9 @@ void updateTimer()
 
 void resetData()
 {
+  /*#ifndef DEBUGRFID
   if (sendData[3] != 3 && sendData[3] != 5 && sendData[3] != 1) sendData[2] = 0;
+  #endif*/
   for (int i = 0; i < 4; i++)
     if (i != 2) sendData[i] = 0;
 

@@ -9,40 +9,37 @@
 
 #include "config.h"
 #include "wirelessDataTransfer.h"
-#ifdef rotaryEncoder
 #include "rotaryEncoder.h"
-#endif
-#ifdef pushButton
 #include "pushButtonMagazine.h"
-#endif
-#ifdef trigger
 #include "hallEffectTrigger.h"
-#endif
-#ifdef magazineReader
 #include "rfidReader.h"
-#endif
+#include "cockingHandle.h"
 
 void setup() {
   /***SETUP SERIAL MONITOR***/
   Serial.begin(115200);
+  
   /***SETUP WIFI & UDP***/
   if (setupWifi()){
     printWifiInfo();
   }
-  //Dit evt. weglaten, is niet nodig...
   setupUDP();
+  
    /***SETUP SENSORS***/
-  #ifdef pushButton
+  #ifdef PUSHBUTTON
   setupMagazineButton();
   #endif
-  #ifdef rotaryEncoder
+  #ifdef ROTARYENCODER
   setupRotaryEncoder();
   #endif
-  #ifdef trigger
+  #ifdef TRIGGER
   setupTrigger();
   #endif
   #ifdef magazineReader
   setupRFID();
+  #endif
+  #ifdef COCKINGHANDLE
+  setupCockingHandle();
   #endif
 }
 
@@ -53,7 +50,7 @@ void loop() {
 
   /***LOG GUN TYPE***/
   #ifdef gunType
-  sendData[3] += gunType;
+  sendData[3] += GUNTYPE;
   #endif
   
   /***CHECK WIFI***/
@@ -62,31 +59,35 @@ void loop() {
   #endif
   
   /***POLLING OF SENSORS***/
-  #ifdef pushButton           
+  #ifdef PUSHBUTTON           
   updateMagazineButton();
   #endif
 
-  #ifdef rotaryEncoder
+  #ifdef ROTARYENCODER
   updateRotaryMode();
   #endif
 
-  #ifdef trigger
+  #ifdef TRIGGER
   updateTrigger();
   #endif
 
-  #ifdef magazineReader
+  #ifdef MAGAZINEREADER
   readRFID();
+  #endif
+
+  #ifdef COCKINGHANDLE
+  readCockingHandle();
   #endif
 
   /***UDP PROTOCOL***/
   
   /*SEND DATA IF APPLICABLE*/
   
-    updateTimer();
-    sendUDP();
-    #ifdef DEBUGDATA
-    printData();
-    #endif
+   updateTimer();
+   sendUDP();
+   #ifdef DEBUGDATA
+   printData();
+   #endif
     
   
   

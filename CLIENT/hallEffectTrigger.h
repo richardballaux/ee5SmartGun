@@ -7,5 +7,6 @@ void setupTrigger();
 int updateTrigger();
 int calculate_average();
 void move_samples();
+void printTriggerInfo(int actualValue, int sendValue);
 
 #endif
