@@ -15,6 +15,8 @@
 #include "rfidReader.h"
 #include "cockingHandle.h"
 
+int triggerValue;
+
 void setup() {
   /***SETUP SERIAL MONITOR***/
   Serial.begin(115200);
@@ -41,6 +43,7 @@ void setup() {
   #ifdef COCKINGHANDLE
   setupCockingHandle();
   #endif
+  
 }
 
 void loop() {
@@ -49,10 +52,15 @@ void loop() {
   if(timeToSendUdp()){
 
   /***LOG GUN TYPE***/
-  #ifdef gunType
+  #ifdef GUNTYPE
   sendData[3] += GUNTYPE;
   #endif
   
+  /***DEMOGUN ALWAYS SEMI MODE***/
+  #ifdef DEMOGUN
+  sendData[3] += 2;
+  #endif
+
   /***CHECK WIFI***/
   #ifdef DEBUGWIFI
   checkWifi();
@@ -68,7 +76,7 @@ void loop() {
   #endif
 
   #ifdef TRIGGER
-  updateTrigger();
+  triggerValue = updateTrigger();
   #endif
 
   #ifdef MAGAZINEREADER
@@ -77,6 +85,10 @@ void loop() {
 
   #ifdef COCKINGHANDLE
   readCockingHandle();
+  #endif
+
+  #ifdef FIVESEVEN
+  sendData[1] = triggerValue;
   #endif
 
   /***UDP PROTOCOL***/

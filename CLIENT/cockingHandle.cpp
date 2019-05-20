@@ -38,6 +38,8 @@ void interruptCocking()
   else{
     counterCocking--; 
   }
+  #ifdef DEBUGCOCKINGHANDLE
   Serial.print("position = ");
   Serial.println(abs(counterCocking));
+  #endif
 }

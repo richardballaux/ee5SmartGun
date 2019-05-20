@@ -4,8 +4,8 @@
 #include "helper.h"
 
 /**CHOOSE TYPE OF GUN**/
-#define SCAR
-//#define FIVESEVEN
+//#define SCAR
+#define FIVESEVEN
 //#define DEMOGUN
 
 /**IF YOU WANT TO DEBUG, ENABLE THIS**/
@@ -18,12 +18,12 @@
 
 /**WIFI CONFIG**/
 #ifndef STASSID
-#define STASSID "Rikkerts-net"
-#define STAPSK "ska12345"
+//#define STASSID "Rikkerts-net"
+//#define STAPSK "ska12345"
 //#define STASSID "LAPTOP_Olivier"
 //#define STAPSK  "valencia"
-//#define STASSID "tpcpcS9+"
-//#define STAPSK  "popopower"
+#define STASSID "tpcpcS9+"
+#define STAPSK  "popopower"
 //#define STASSID "telenet-ACA5AE9"
 //#define STAPSK "fTpZz2ny2bpu"
 #endif
@@ -31,7 +31,7 @@
 /**UDP CONFIG**/
 #define localPort 4210
 //#define IP_Address 192, 168, 137, 40
-#define IP_Address 192, 168, 43, 49
+#define IP_Address 192, 168, 43, 167
 
 /**PINS DIVISION**/
 #define analogTrigger A0

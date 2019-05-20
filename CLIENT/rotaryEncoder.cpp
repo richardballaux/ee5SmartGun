@@ -9,7 +9,7 @@ void setupRotaryEncoder()
 {
   pinMode(rotaryPin1,INPUT);
   pinMode(rotaryPin2,INPUT);
-  attachInterrupt(digitalPinToInterrupt(rotaryPin2), countRotaryMode, CHANGE);
+  attachInterrupt(digitalPinToInterrupt(rotaryPin2), interruptRotary, CHANGE);
 }
   
 int updateRotaryMode()
@@ -25,7 +25,7 @@ int updateRotaryMode()
   return value;
 }
 
-void countRotaryMode(){
+void interruptRotary(){
   
   if(digitalRead(rotaryPin1) != digitalRead(rotaryPin2)){
     counterRotary++;

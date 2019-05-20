@@ -9,6 +9,6 @@
 
 void setupRotaryEncoder();
 int updateRotaryMode();
-void countRotaryMode();
+void interruptRotary();
 
 #endif
