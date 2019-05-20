@@ -2,7 +2,7 @@
 #define _COCKINGHANDLE_H
 
 #define BEGINHANDLE 0
-#define ENDHANDLE 18
+#define ENDHANDLE 9
 
 void setupCockingHandle();
 void readCockingHandle();

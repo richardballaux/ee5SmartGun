@@ -9,7 +9,7 @@ void setupCockingHandle()
   pinMode(cockingSensor2,INPUT);
   pinMode(pushBtnReset,INPUT);
 
-  attachInterrupt(digitalPinToInterrupt(cockingSensor2), interruptCocking, CHANGE);
+  attachInterrupt(digitalPinToInterrupt(cockingSensor2), interruptCocking, FALLING);
   
 }
 
@@ -31,9 +31,13 @@ void readCockingHandle()
 
 void interruptCocking()
 {  
-  if(digitalRead(cockingSensor1) != digitalRead(cockingSensor2))
-    if (counterCocking < 18)  counterCocking++;
+  if(digitalRead(cockingSensor2) != digitalRead(cockingSensor1)){
+    counterCocking++;
+  }
   
-  else
-    if (counterCocking >= 0)  counterCocking--; 
+  else{
+    counterCocking--; 
+  }
+  Serial.print("position = ");
+  Serial.println(abs(counterCocking));
 }

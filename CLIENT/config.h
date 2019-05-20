@@ -14,12 +14,14 @@
 //#define DEBUGWIFI
 //#define DEBUGRFID
 //#define DEBUGTRIGGER
-#define DEBUGCOCKINGHANDLE
+//#define DEBUGCOCKINGHANDLE
 
 /**WIFI CONFIG**/
 #ifndef STASSID
-#define STASSID "LAPTOP_Olivier"
-#define STAPSK  "valencia"
+#define STASSID "Rikkerts-net"
+#define STAPSK "ska12345"
+//#define STASSID "LAPTOP_Olivier"
+//#define STAPSK  "valencia"
 //#define STASSID "tpcpcS9+"
 //#define STAPSK  "popopower"
 //#define STASSID "telenet-ACA5AE9"
@@ -29,7 +31,7 @@
 /**UDP CONFIG**/
 #define localPort 4210
 //#define IP_Address 192, 168, 137, 40
-#define IP_Address 192, 168, 137, 116
+#define IP_Address 192, 168, 43, 49
 
 /**PINS DIVISION**/
 #define analogTrigger A0
