@@ -20,7 +20,6 @@ int triggerValue;
 void setup() {
   /***SETUP SERIAL MONITOR***/
   Serial.begin(115200);
-  
   /***SETUP WIFI & UDP***/
   if (setupWifi()){
     printWifiInfo();

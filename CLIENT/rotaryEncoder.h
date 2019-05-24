@@ -9,6 +9,7 @@
 
 void setupRotaryEncoder();
 int updateRotaryMode();
-void interruptRotary();
+void interruptRotary1();
+void interruptRotary2();
 
 #endif

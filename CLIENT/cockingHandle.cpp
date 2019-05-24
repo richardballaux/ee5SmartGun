@@ -25,7 +25,7 @@ void readCockingHandle()
   Serial.print("Cocking Handle value is ");
   Serial.println(abs(counterCocking));
   #endif
-  sendData[1] = map(counterCocking, ENDHANDLE, BEGINHANDLE,255,0);  
+  sendData[1] = map(abs(counterCocking), ENDHANDLE, BEGINHANDLE,255,0);  
   
 }
 

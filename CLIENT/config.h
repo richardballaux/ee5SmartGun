@@ -15,15 +15,16 @@
 //#define DEBUGRFID
 //#define DEBUGTRIGGER
 //#define DEBUGCOCKINGHANDLE
+#define DEBUGROTARY
 
 /**WIFI CONFIG**/
 #ifndef STASSID
 //#define STASSID "Rikkerts-net"
 //#define STAPSK "ska12345"
-//#define STASSID "LAPTOP_Olivier"
-//#define STAPSK  "valencia"
-#define STASSID "tpcpcS9+"
-#define STAPSK  "popopower"
+#define STASSID "LAPTOP_Olivier"
+#define STAPSK  "valencia"
+//#define STASSID "tpcpcS9+"
+//#define STAPSK  "popopower"
 //#define STASSID "telenet-ACA5AE9"
 //#define STAPSK "fTpZz2ny2bpu"
 #endif
