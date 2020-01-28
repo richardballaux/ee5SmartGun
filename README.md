@@ -6,4 +6,4 @@ This repo contains all the necessary code for the Arduino's that were used insid
 
 ## Project Poster
 
-![alt text](link...     Poster)
+![alt text](https://github.com/richardballaux/ee5SmartGun/blob/master/ee5-Poster.jpg "Poster")
